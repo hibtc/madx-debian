@@ -1,0 +1,5 @@
+*
+!/debian
+!/debian/*
+!/.gitignore
+*.swp

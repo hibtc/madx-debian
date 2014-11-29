@@ -4,5 +4,33 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-%:
-	dh  $@
+MADX_VERSION  = 5.02.04
+MADX_RELEASES = http://madx.web.cern.ch/madx/releases
+MADX_TARBALL  = madx-$(MADX_VERSION).tgz
+MADX_UPSTREAM = $(MADX_RELEASES)/$(MADX_VERSION)/$(MADX_TARBALL)
+MADX_SOURCES  = madx-$(MADX_VERSION)
+
+# Skip tests:
+export DEB_BUILD_OPTIONS=nocheck
+
+FLAGS = -DCMAKE_C_COMPILER=gcc\
+        -DCMAKE_Fortran_COMPILER=gfortran \
+        -DMADX_STATIC=OFF
+        -DMADX_ONLINE=OFF \
+        -DBUILD_SHARED_LIBS=ON \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+%: $(MADX_TARBALL)
+	dh $@ --buildsystem=cmake --sourcedirectory=$(MADX_SOURCES)
+
+override_dh_auto_configure:
+	dh_auto_configure -- $(FLAGS)
+
+#override_dh_auto_test:
+#	echo "Skipping tests"
+
+# download + extract the MAD-X source code: 
+$(MADX_TARBALL):
+	wget $(MADX_UPSTREAM)
+	tar -xzf $(MADX_TARBALL)

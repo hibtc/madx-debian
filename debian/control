@@ -2,14 +2,27 @@ Source: madx
 Maintainer: Thomas Gläßle <t_glaessle@gmx.de>
 Section: non-free/science
 Priority: extra
-Build-Depends: debhelper (>=9), cmake
-Standards-Version: 5.02.01
+Build-Depends: debhelper (>=9),
+               cmake,
+               libblas-dev,
+               liblapack-dev,
+               libx11-dev,
+               gfortran,
+               lib32z1-dev
+Standards-Version: 5.02.04
 Homepage: http://madx.web.cern.ch/madx/
-Vcs-Bzr: lp:~coldfix/madx
+Vcs-Git: git://github.com/hibtc/madx-debpkg
+Vcs-Browser: https://github.com/hibtc/madx-debpkg
 
 Package: madx
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libblas,
+         liblapack,
+         libx11,
+         gfortran,
+         lib32z1
 Description: Methodical Accelerator Design 
  MAD is a project with a long history, aiming to be at the forefront of
  computational physics in the field of particle accelerator design and
