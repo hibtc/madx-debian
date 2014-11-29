@@ -1,7 +1,6 @@
 Source: madx
-Maintainer: Thomas Gläßle <t_glaessle@gmx.de>
-Section: non-free/science
 Priority: extra
+Maintainer: Thomas Gläßle <t_glaessle@gmx.de>
 Build-Depends: debhelper (>=9),
                cmake,
                libblas-dev,
@@ -9,12 +8,14 @@ Build-Depends: debhelper (>=9),
                libx11-dev,
                gfortran,
                lib32z1-dev
-Standards-Version: 5.02.04
+Standards-Version: 3.9.4
+Section: non-free/science
 Homepage: http://madx.web.cern.ch/madx/
 Vcs-Git: git://github.com/hibtc/madx-debpkg
 Vcs-Browser: https://github.com/hibtc/madx-debpkg
 
 Package: madx
+Section: non-free/science
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
