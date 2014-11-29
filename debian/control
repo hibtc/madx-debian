@@ -1,0 +1,21 @@
+Source: madx
+Maintainer: Thomas Gläßle <t_glaessle@gmx.de>
+Section: non-free/science
+Priority: extra
+Build-Depends: debhelper (>=9), cmake
+Standards-Version: 5.02.01
+Homepage: http://madx.web.cern.ch/madx/
+Vcs-Bzr: lp:~coldfix/madx
+
+Package: madx
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Methodical Accelerator Design 
+ MAD is a project with a long history, aiming to be at the forefront of
+ computational physics in the field of particle accelerator design and
+ simulation. The MAD scripting language is de facto the standard to describe
+ particle accelerators, simulate beam dynamics and optimize beam optics.
+ MAD-X is the successor of MAD-8 and was first released in June, 2002. It
+ offers most of the MAD-8 functionalities, with some additions, corrections,
+ and extensions. The most important of these extensions is the Polymorphic
+ Tracking Code (PTC) of E. Forest.
