@@ -2,4 +2,5 @@
 !/debian
 !/debian/*
 !/.gitignore
+!/README.rst
 *.swp
