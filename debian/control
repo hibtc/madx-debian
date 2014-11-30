@@ -19,9 +19,6 @@ Section: non-free/science
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         libblas,
-         liblapack,
-         libx11,
          gfortran,
          lib32z1
 Description: Methodical Accelerator Design 
