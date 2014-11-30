@@ -8,7 +8,7 @@ Build-Depends: debhelper (>=9),
                libx11-dev,
                gfortran,
                lib32z1-dev
-Standards-Version: 3.9.4
+Standards-Version: 3.9.5
 Section: non-free/science
 Homepage: http://madx.web.cern.ch/madx/
 Vcs-Git: git://github.com/hibtc/madx-debpkg
