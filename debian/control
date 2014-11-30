@@ -14,7 +14,7 @@ Homepage: http://madx.web.cern.ch/madx/
 Vcs-Git: git://github.com/hibtc/madx-debpkg
 Vcs-Browser: https://github.com/hibtc/madx-debpkg
 
-Package: madx
+Package: libmadx-dev
 Section: non-free/science
 Architecture: any
 Depends: ${shlibs:Depends},
