@@ -21,6 +21,12 @@ prepare:
 makepkg:
 	cd spkg/$(MADX_SOURCES) && debuild -S -sa
 
+deb: clean prepare
+	cd spkg/$(MADX_SOURCES) && debuild
+
+install:
+	dpkg -i spkg/*.deb
+
 upload:
 	dput ppa:coldfix/madx spkg/madx_$(MADX_VERSION)-1_source.changes
 
