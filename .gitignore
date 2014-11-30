@@ -1,4 +1,2 @@
-*
-!/debian
-!/.gitignore
-!/README.rst
+spkg
+.swp
