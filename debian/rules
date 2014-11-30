@@ -7,9 +7,9 @@
 # Skip tests:
 export DEB_BUILD_OPTIONS=nocheck
 
-FLAGS = -DCMAKE_C_COMPILER=gcc\
+FLAGS = -DCMAKE_C_COMPILER=gcc \
         -DCMAKE_Fortran_COMPILER=gfortran \
-        -DMADX_STATIC=OFF
+        -DMADX_STATIC=OFF \
         -DMADX_ONLINE=OFF \
         -DBUILD_SHARED_LIBS=ON \
         -DCMAKE_INSTALL_PREFIX=/usr \
