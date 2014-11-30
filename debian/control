@@ -1,4 +1,4 @@
-Source: madx
+Source: libmadx-dev
 Priority: extra
 Maintainer: Thomas Gläßle <t_glaessle@gmx.de>
 Build-Depends: debhelper (>=9),
