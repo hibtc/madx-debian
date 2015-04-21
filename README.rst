@@ -35,6 +35,8 @@ The main purpose of this PPA is to speed up testing of cpymad_ on Travis_.
 Therefore, only the default `Travis CI environment`_ is supported for now,
 i.e. ubuntu 12.04 LTS 64bit (precise pangolin).
 
+Email me if you want to use this package on another version of ubuntu.
+
 .. _on launchpad: https://launchpad.net/~coldfix/+archive/ubuntu/madx/
 .. _cpymad: https://github.com/hibtc/cpymad
 .. _Travis: https://travis-ci.org/hibtc/cpymad
