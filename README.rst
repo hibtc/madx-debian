@@ -49,6 +49,10 @@ who wants to create their own MAD-X package or update this package to a
 newer MAD-X version. This assumes you are running on a reasonably
 up-to-date version of ubuntu.
 
+
+Setup environment
+~~~~~~~~~~~~~~~~~
+
 To get going, first install packaging tools:
 
 .. code-block:: bash
@@ -61,10 +65,36 @@ To get going, first install packaging tools:
     # do the following:
     sudo apt-get install packaging-dev
 
-Now you may edit the contents of the ``debian/`` folder (in particular the
-files ``changelog`` and ``control``) as well as the ``Makefile`` according
-to your needs. From there on, there might be multiple things you might want
-to do:
+Configure your name and email to be used for packaging in your ``~/.bashrc``:
+
+.. code-block:: bash
+
+    export DEBEMAIL=t_glaessle@gmx.de
+    export DEBFULLNAME="Thomas Gläßle"
+
+Then reload the file (``source ~/.bashrc``) or simply restart your terminal.
+
+
+Update package
+~~~~~~~~~~~~~~
+
+Now you may edit the contents of the ``debian/`` folder as well as the
+``Makefile`` according to your needs. In particular the following files need to
+be updated
+
+- ``Makefile``: version number, download recipe for upstream tarball
+
+- ``debian/control``: dependencies, conflicts, description
+
+- ``debian/rules``: build recipe
+
+- ``debian/changelog``: add package revision (via ``dch -v VERSION``)
+
+
+Build/install/upload
+~~~~~~~~~~~~~~~~~~~~
+
+From there on, there might be multiple things you might want to do:
 
 .. code-block:: bash
 
@@ -82,6 +112,17 @@ to do:
     # OR create and install .deb package
     debuild
     sudo dpkg -i ../libmadx-dev-*.deb
+
+When uploading a new package revision for the same upstream release, the
+uploaded source tarball must be exactly the same, or else the upload will be
+rejected. Therefore, either
+
+- redownload the source tarball from launchpad::
+
+    PPA=https://launchpad.net/~coldfix/+archive/ubuntu/madx
+    wget $PPA/+files/libmadx-dev_5.02.05.orig.tar.gz
+
+- OR remove the tar file before creating/uploading the source package
 
 
 Resources
