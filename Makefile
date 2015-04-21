@@ -1,9 +1,9 @@
 
 PACKAGE  = libmadx-dev
-VERSION  = 5.02.04
+VERSION  = 5.02.05
 
 RELEASES = http://madx.web.cern.ch/madx/releases
-DOWNLOAD = madx-$(VERSION).tgz
+DOWNLOAD = madx-src.tgz
 EXTRACT  = madx-$(VERSION)
 UPSTREAM = $(RELEASES)/$(VERSION)/$(DOWNLOAD)
 
@@ -19,8 +19,9 @@ prepare:
 	mkdir -p $(TEMP)
 	wget $(UPSTREAM)
 	tar -xzf $(DOWNLOAD)
-	mv $(DOWNLOAD) $(TARBALL)
 	mv $(EXTRACT) $(BUILDDIR)
+	rm $(DOWNLOAD)
+	tar -czf $(TARBALL) -C $(dir $(BUILDDIR)) $(notdir $(BUILDDIR))
 	cp -r debian $(BUILDDIR)
 
 makepkg:
