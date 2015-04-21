@@ -15,13 +15,17 @@ BUILDDIR = $(TEMP)/$(PACKAGE)-$(VERSION)
 all: prepare makepkg
 
 # download + extract the MAD-X source code: 
-prepare:
+$(TARBALL):
 	mkdir -p $(TEMP)
 	wget $(UPSTREAM)
 	tar -xzf $(DOWNLOAD)
 	mv $(EXTRACT) $(BUILDDIR)
 	rm $(DOWNLOAD)
 	tar -czf $(TARBALL) -C $(dir $(BUILDDIR)) $(notdir $(BUILDDIR))
+
+download: $(TARBALL)
+
+prepare: $(TARBALL)
 	cp -r debian $(BUILDDIR)
 
 makepkg:
