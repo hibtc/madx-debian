@@ -19,6 +19,7 @@ FLAGS = -DCMAKE_C_COMPILER=gcc \
 	dh $@ --buildsystem=cmake
 
 override_dh_auto_configure:
+	find . -name '._*' -print0 | xargs -0 rm
 	dh_auto_configure -- $(FLAGS)
 
 #override_dh_auto_test:

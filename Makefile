@@ -19,7 +19,6 @@ prepare:
 	mkdir -p $(TEMP)
 	wget $(UPSTREAM)
 	tar -xzf $(DOWNLOAD)
-	find . -name '._*' -print0 | xargs -0 rm
 	mv $(EXTRACT) $(BUILDDIR)
 	rm $(DOWNLOAD)
 	tar -czf $(TARBALL) -C $(dir $(BUILDDIR)) $(notdir $(BUILDDIR))
