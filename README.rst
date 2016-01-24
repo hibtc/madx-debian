@@ -109,7 +109,7 @@ From there on, there might be multiple things you might want to do:
 
     # create source package and upload
     debuild -S -sa
-    dput ppa:coldfix/madx libmadx-dev-*_source.changes
+    dput ppa:coldfix/madx ../libmadx-dev-*_source.changes
 
     # OR create and install .deb package
     debuild
@@ -122,7 +122,7 @@ rejected. Therefore, either
 - redownload the source tarball from launchpad::
 
     PPA=https://launchpad.net/~coldfix/+archive/ubuntu/madx
-    wget $PPA/+files/libmadx-dev_5.02.05.orig.tar.gz
+    wget $PPA/+files/libmadx-dev_5.02.08.orig.tar.gz
 
 - OR remove the tar file before creating/uploading the source package
 

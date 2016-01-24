@@ -1,3 +1,9 @@
+libmadx-dev (5.02.08) precise; urgency=medium
+
+  * Update to most recent upstream version
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Sun, 24 Jan 2016 17:06:26 +0100
+
 libmadx-dev (5.02.05-2) precise; urgency=medium
 
   * Remove build-breaking temporary files from upstream source
