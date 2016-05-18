@@ -18,6 +18,12 @@ FLAGS = -DCMAKE_C_COMPILER=gcc \
 %: $(MADX_TARBALL)
 	dh $@ --buildsystem=cmake
 
+package=debian/libmadx-dev
+
+override_dh_install:
+	dh_install
+	mv $(CURDIR)/$(package)/usr/bin/ndiff $(CURDIR)/$(package)/usr/bin/numdiff
+
 override_dh_auto_configure:
 	find . -name '._*' -print0 | xargs -0 -r rm
 	dh_auto_configure -- $(FLAGS)
