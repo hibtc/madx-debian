@@ -1,0 +1,11 @@
+--- a/libs/ptc/src/Sn_mad_like.f90
++++ b/libs/ptc/src/Sn_mad_like.f90
+@@ -8,7 +8,7 @@ module Mad_like
+   IMPLICIT NONE
+   public
+ 
+-  private QUADTILT, SOLTILT, EL_Q,EL_0,pancake_tilt
++  private QUADTILT, SOLTILT, EL_Q,EL_0
+   private drft,r_r !,rot,mark
+   PRIVATE SEXTTILT,OCTUTILT
+   private HKICKTILT,VKICKTILT,GKICKTILT

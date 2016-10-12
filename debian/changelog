@@ -1,3 +1,15 @@
+libmadx-dev (5.02.11-2) precise; urgency=medium
+
+  * Fix a build problem with pancake
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Wed, 12 Oct 2016 15:21:50 +0200
+
+libmadx-dev (5.02.11) precise; urgency=medium
+
+  * Update to upstream version 5.02.11
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Wed, 12 Oct 2016 00:53:00 +0200
+
 libmadx-dev (5.02.10-1) precise; urgency=medium
 
   * Update to upstream version 5.02.10
