@@ -1,3 +1,9 @@
+libmadx-dev (5.02.12-1) trusty; urgency=medium
+
+  * Update to MAD-X 5.02.12
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Sun, 16 Oct 2016 11:24:51 +0200
+
 libmadx-dev (5.02.11-1) trusty; urgency=medium
 
   * Update to MAD-X 5.02.11

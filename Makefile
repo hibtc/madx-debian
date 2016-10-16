@@ -1,6 +1,6 @@
 
 PACKAGE  = libmadx-dev
-VERSION  = 5.02.11
+VERSION  = 5.02.12
 
 RELEASES = http://madx.web.cern.ch/madx/releases
 DOWNLOAD = madx-src.tgz
