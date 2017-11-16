@@ -1,3 +1,9 @@
+libmadx-dev (5.03.07) trusty; urgency=medium
+
+  * Update to MAD-X 5.03.07 (github!)
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Thu, 16 Nov 2017 10:36:37 +0100
+
 libmadx-dev (5.03.05-1) trusty; urgency=medium
 
   * Update to MAD-X 5.03.05

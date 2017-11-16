@@ -25,7 +25,6 @@ override_dh_install:
 	mv $(CURDIR)/$(package)/usr/bin/ndiff $(CURDIR)/$(package)/usr/bin/numdiff
 
 override_dh_auto_configure:
-	find . -name '._*' -print0 | xargs -0 -r rm
 	dh_auto_configure -- $(FLAGS)
 
 #override_dh_auto_test:

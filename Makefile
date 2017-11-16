@@ -1,11 +1,11 @@
 
 PACKAGE  = libmadx-dev
-VERSION  = 5.03.05
+VERSION  = 5.03.07
 
-RELEASES = http://madx.web.cern.ch/madx/releases
-DOWNLOAD = madx-src.tgz
-EXTRACT  = madx-$(VERSION)
-UPSTREAM = $(RELEASES)/$(VERSION)/$(DOWNLOAD)
+RELEASES = https://github.com/MethodicalAcceleratorDesign/MAD-X/archive
+DOWNLOAD = $(VERSION).tar.gz
+EXTRACT  = MAD-X-$(VERSION)
+UPSTREAM = $(RELEASES)/$(DOWNLOAD)
 
 TEMP     = build
 TARBALL  = $(TEMP)/$(PACKAGE)_$(VERSION).orig.tar.gz
