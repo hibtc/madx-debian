@@ -11,6 +11,7 @@ FLAGS = -DCMAKE_C_COMPILER=gcc \
         -DCMAKE_Fortran_COMPILER=gfortran \
         -DMADX_STATIC=OFF \
         -DMADX_ONLINE=OFF \
+        -DUSE_GC=ON \
         -DBUILD_SHARED_LIBS=ON \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo
