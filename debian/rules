@@ -14,7 +14,7 @@ FLAGS = -DCMAKE_C_COMPILER=gcc \
         -DUSE_GC=ON \
         -DBUILD_SHARED_LIBS=ON \
         -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_BUILD_TYPE=RelWithDebInfo
+        -DCMAKE_BUILD_TYPE=Release
 
 %: $(MADX_TARBALL)
 	dh $@ --buildsystem=cmake
