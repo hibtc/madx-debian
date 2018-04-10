@@ -1,3 +1,10 @@
+libmadx-dev (5.04.00-2) trusty; urgency=medium
+
+  * Fix build error due to CMake 2.8 not knowing about the
+    CXX_STANDARD property.
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Tue, 10 Apr 2018 04:12:15 +0200
+
 libmadx-dev (5.04.00-1) trusty; urgency=medium
 
   * Update to MAD-X 5.04.00
