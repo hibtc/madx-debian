@@ -1,6 +1,6 @@
 
 PACKAGE  = libmadx-dev
-VERSION  = 5.04.00
+VERSION  = 5.04.01
 
 RELEASES = https://github.com/MethodicalAcceleratorDesign/MAD-X/archive
 DOWNLOAD = $(VERSION).tar.gz
