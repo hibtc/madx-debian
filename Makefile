@@ -1,6 +1,7 @@
 
 PACKAGE  = libmadx-dev
 VERSION  = 5.04.01
+REVISION = 4
 
 RELEASES = https://github.com/MethodicalAcceleratorDesign/MAD-X/archive
 DOWNLOAD = $(VERSION).tar.gz
@@ -9,6 +10,7 @@ UPSTREAM = $(RELEASES)/$(DOWNLOAD)
 
 TEMP     = build
 TARBALL  = $(TEMP)/$(PACKAGE)_$(VERSION).orig.tar.gz
+UPLOAD   = $(TEMP)/$(PACKAGE)_$(VERSION)-$(REVISION)_source.changes
 BUILDDIR = $(TEMP)/$(PACKAGE)-$(VERSION)
 
 
@@ -38,7 +40,7 @@ install:
 	dpkg -i $(TEMP)/*.deb
 
 upload:
-	dput ppa:coldfix/madx $(TEMP)/*_source.changes
+	dput ppa:coldfix/madx $(UPLOAD)
 
 clean:
 	rm -rf $(TEMP)
