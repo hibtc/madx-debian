@@ -44,4 +44,4 @@ upload:
 	dput ppa:coldfix/madx $(UPLOAD)
 
 clean:
-	rm -rf $(TEMP)
+	rm -rf $(BUILDDIR)
