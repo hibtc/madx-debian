@@ -18,7 +18,10 @@ Package: libmadx-dev
 Section: non-free/science
 Architecture: amd64
 Depends: ${shlibs:Depends},
-         ${misc:Depends}
+         ${misc:Depends},
+         libblas-dev,
+         liblapack-dev,
+         gfortran
 Description: Methodical Accelerator Design 
  MAD is a project with a long history, aiming to be at the forefront of
  computational physics in the field of particle accelerator design and
