@@ -31,7 +31,7 @@ prepare: $(TARBALL)
 	cp -r debian $(BUILDDIR)
 
 makepkg:
-	cd $(BUILDDIR) && debuild -S -sa
+	cd $(BUILDDIR) && debuild -S
 
 deb: clean prepare
 	cd $(BUILDDIR) && debuild
