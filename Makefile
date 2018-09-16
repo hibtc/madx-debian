@@ -20,14 +20,15 @@ all: prepare makepkg
 $(TARBALL):
 	mkdir -p $(TEMP)
 	wget $(UPSTREAM)
-	tar -xzf $(DOWNLOAD)
+	mv $(DOWNLOAD) $(TARBALL)
+
+$(BUILDDIR): $(TARBALL)
+	tar -xzf $(TARBALL)
 	mv $(EXTRACT) $(BUILDDIR)
-	rm $(DOWNLOAD)
-	tar -czf $(TARBALL) -C $(dir $(BUILDDIR)) $(notdir $(BUILDDIR))
 
 download: $(TARBALL)
 
-prepare: $(TARBALL)
+prepare: $(BUILDDIR)
 	cp -r debian $(BUILDDIR)
 
 makepkg:
