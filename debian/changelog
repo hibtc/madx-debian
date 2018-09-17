@@ -1,4 +1,4 @@
-libmadx-dev (5.04.01+post1-1) trusty; urgency=medium
+libmadx-dev (5.04.01+post1-1) UNRELEASED; urgency=medium
 
   * Use a newer upstream commit that has makes X11 and zlib
     optional and integrates the cmake patch

@@ -103,11 +103,32 @@ From there on, there might be multiple things you might want to do:
     # make sure, there are no left-overs from previous attempts:
     make clean
 
-    # download and extract MAD-X into build/ subdirectory:
-    make prepare
-    cd build/libmadx-dev-*
+    # download MAD-X and make trusty source package:
+    make CODENAME=trusty CODEDATE=14.04
 
-    # create source package and upload
+    # upload final source package:
+    make CODENAME=trusty CODEDATE=14.04 upload
+
+The default make target is actually composed of two steps:
+
+.. code-block:: bash
+
+    # prepare build folder for trusty source package:
+    # download and extract MAD-X into build/trusty subdirectory:
+    make CODENAME=trusty CODEDATE=14.04 prepare
+
+    # create the source archive:
+    make CODENAME=trusty CODEDATE=14.04 makepkg
+
+If there is need to things manually, I also want to mention these
+lower-level commands:
+
+.. code-block:: bash
+
+    cd build/trusty/libmadx-dev-*
+
+    # create source package and upload. `-sa` means force upload
+    # the `.orig.tar.gz` file
     debuild -S -sa
     dput ppa:coldfix/madx ../libmadx-dev-*_source.changes
 
