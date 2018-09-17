@@ -5,9 +5,7 @@ Build-Depends: debhelper (>=9),
                cmake,
                libblas-dev,
                liblapack-dev,
-               libx11-dev,
-               gfortran,
-               lib32z1-dev
+               gfortran
 Standards-Version: 3.9.5
 Section: non-free/science
 Homepage: http://madx.web.cern.ch/madx/

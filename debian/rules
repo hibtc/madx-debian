@@ -11,6 +11,7 @@ FLAGS = -DCMAKE_C_COMPILER=gcc \
         -DCMAKE_Fortran_COMPILER=gfortran \
         -DMADX_STATIC=OFF \
         -DMADX_ONLINE=OFF \
+        -DMADX_X11=OFF \
         -DUSE_GC=ON \
         -DBUILD_SHARED_LIBS=OFF \
         -DCMAKE_INSTALL_PREFIX=/usr \

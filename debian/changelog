@@ -1,3 +1,11 @@
+libmadx-dev (5.04.01+post1-1) trusty; urgency=medium
+
+  * Use a newer upstream commit that has makes X11 and zlib
+    optional and integrates the cmake patch
+  * Remove dependency on X11 and zlib
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Mon, 17 Sep 2018 02:13:51 +0200
+
 libmadx-dev (5.04.01-4) trusty; urgency=medium
 
   * Add dependencies for linking the static archive

@@ -1,11 +1,12 @@
 
 PACKAGE  = libmadx-dev
-VERSION  = 5.04.01
-REVISION = 4
+VERSION  = 5.04.01+post1
+REVISION = 1
 
 RELEASES = https://github.com/MethodicalAcceleratorDesign/MAD-X/archive
-DOWNLOAD = $(VERSION).tar.gz
-EXTRACT  = MAD-X-$(VERSION)
+COMMIT   = 36769507dcfea517aff2f11c0e219c1ae37634cf
+DOWNLOAD = $(COMMIT).tar.gz
+EXTRACT  = MAD-X-$(COMMIT)
 UPSTREAM = $(RELEASES)/$(DOWNLOAD)
 
 TEMP     = build
