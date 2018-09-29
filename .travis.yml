@@ -1,0 +1,44 @@
+language: c
+sudo: false
+
+matrix:
+  include:
+    # Note that we can't rely on lsb_release to yield the correct information
+    # (apparently the xenial builder is currently executed on travis), so we
+    # have to define these variables manually:
+    - {dist: trusty, env: CODENAME=trusty RELEASE=14.04}
+    - {dist: xenial, env: CODENAME=xenial RELEASE=16.04}
+
+env:
+  global:
+    export DEBEMAIL=t_glaessle@gmx.de
+    export DEBFULLNAME="Thomas Gläßle"
+
+addons:
+  apt:
+    packages:
+      - build-essential
+      - devscripts
+      - debhelper
+      - gnupg
+      - fakeroot
+      - dput
+
+install:
+  - openssl aes-256-cbc
+        -K $encrypted_2472284bc835_key
+        -iv $encrypted_2472284bc835_iv
+        -in .travis/private.key.enc
+        -out .travis/private.key -d
+  - gpg --import .travis/private.key
+
+script:
+  - sed -i "s/) [a-z]*;/~ubuntu$RELEASE) $CODENAME;/" debian/changelog
+  - make
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: make upload
+  on:
+    tags: true

@@ -1,19 +1,17 @@
 MAD-X debian package
 --------------------
 
-This repository contains templates needed to create a ``libmadx-dev``
-ubuntu source package for a shared library installation of MAD-X_. The
-suffix ``-dev`` indicates that the package also contains all necessary
-files to link against the shared library.
+This repository contains utilities to create a ``libmadx-dev`` debian package
+for a static library build of MAD-X_.
 
 .. _MAD-X: http://cern.ch/mad
 
-
-Disclaimer
-==========
-
 This is an unofficial build of MAD-X that is not supported by CERN, i.e. in
 case of problems you will not get help there.
+
+The main purpose of this PPA is to speed up testing of cpymad_ on Travis_.
+Therefore, only the default `Travis CI environment`_ is supported for now.
+Email me if you want to use this package on another version of ubuntu.
 
 
 Usage
@@ -31,12 +29,6 @@ you can use this PPA as follows:
     # install library:
     sudo apt-get install libmadx-dev
 
-The main purpose of this PPA is to speed up testing of cpymad_ on Travis_.
-Therefore, only the default `Travis CI environment`_ is supported for now,
-i.e. ubuntu 12.04 LTS 64bit (precise pangolin).
-
-Email me if you want to use this package on another version of ubuntu.
-
 .. _on launchpad: https://launchpad.net/~coldfix/+archive/ubuntu/madx/
 .. _cpymad: https://github.com/hibtc/cpymad
 .. _Travis: https://travis-ci.org/hibtc/cpymad
@@ -51,6 +43,66 @@ who wants to create their own MAD-X package or update this package to a
 newer MAD-X version. This assumes you are running on a reasonably
 up-to-date version of ubuntu.
 
+
+Files
+~~~~~
+
+Now edit the contents of the ``debian/`` folder as well as the ``Makefile``
+according to your needs. In particular the following files need to be updated:
+
+- ``debian/changelog``: add a new entry (``dch -v VERSION``), see also
+  `Version numbers`_ for the targeted ubuntu release.
+
+- ``Makefile``: update the ``COMMIT`` variable. It should usually be set to
+  ``COMMIT=$(VERSION)`` unless doing a post-release.
+
+Less frequently you may also need to change:
+
+- ``debian/control``: dependencies, conflicts, description
+
+- ``debian/rules``: build recipe: cmake parameters
+
+
+Trigger package build
+~~~~~~~~~~~~~~~~~~~~~
+
+Pushing a new commit will trigger Travis CI to build a new source package. If
+this succeeds, create a tag and push it to make travis upload the source
+package, e.g.::
+
+   git tag 5.04.01-2
+   git push --tag
+
+
+In order to add another ubuntu release that is available on travis, add a
+corresponding entry in ``.travis.yml`` under the ``matrix:`` section.
+
+
+Version numbers
+~~~~~~~~~~~~~~~
+
+The version format is assumed to be ``upstream_version-revision``, where
+``upstream_version`` is the MAD-X version number and ``revision`` starts at 1
+and is incremented in every package revision for the same upstream release.
+
+If building manually, you should add a suffix ``~ubuntuYY.MM`` with the
+release date of the targeted ubuntu release after the revision number.
+
+For example, for the second revision of MAD-X 5.04.02, the full version targeted
+on ubuntu 14.04 (trusty) is::
+
+    5.04.02-2~ubuntu14.04
+
+It is important to uphoald this format, otherwise launchpad may reject your
+present or future uploads (see Troubleshooting_).
+
+See Version_ on how debian version numbers are formed.
+
+.. _Version: https://www.debian.org/doc/debian-policy/ch-controlfields.html#version
+
+
+Building manually
+=================
 
 Setup environment
 ~~~~~~~~~~~~~~~~~
@@ -67,6 +119,19 @@ To get going, first install packaging tools:
     # do the following:
     sudo apt-get install packaging-dev
 
+Create and publish a gnupg key:
+
+.. code-block:: bash
+
+    gpg --full-generate-key
+    gpg --send-keys --keyserver keyserver.ubuntu.com <KEY-ID>
+
+It is important to use exactly the same name and email address as in the
+changelog. Furthermore, the *comment* field counts towards the name and is
+therefore best avoided.
+
+Import the key at: https://launchpad.net/~coldfix/+editpgpkeys
+
 Configure your name and email to be used for packaging in your ``~/.bashrc``:
 
 .. code-block:: bash
@@ -77,23 +142,8 @@ Configure your name and email to be used for packaging in your ``~/.bashrc``:
 Then reload the file (``source ~/.bashrc``) or simply restart your terminal.
 
 
-Update package
-~~~~~~~~~~~~~~
-
-Now edit the contents of the ``debian/`` folder as well as the ``Makefile``
-according to your needs. In particular the following files need to be updated:
-
-- ``debian/changelog``: add package revision via ``dch -v VERSION``, see
-  `Version numbers`_. Start with the latest targeted ubuntu release.
-
-- ``Makefile``: update the ``COMMIT`` variable. It should usually be set to
-  ``COMMIT=$(VERSION)`` unless doing a post-release.
-
-Less frequently you may also need to change:
-
-- ``debian/control``: dependencies, conflicts, description
-
-- ``debian/rules``: build recipe: cmake parameters
+Build and upload
+~~~~~~~~~~~~~~~~
 
 From there on, proceed as follows:
 
@@ -116,61 +166,6 @@ Currently, the targeted ubuntu versions are::
 
     xenial (16.04)
     trusty (14.04)
-
-
-Version numbers
-~~~~~~~~~~~~~~~
-
-The version format is assumed to be ``upstream_version-revision``, where
-``upstream_version`` is the MAD-X version number and ``revision`` should be
-formed as follows:
-
-.. code-block:: none
-
-    X~ubuntuYY.MM
-
-Start ``X`` at 1 and increment on every new package revision of the same upstream
-version. ``YY.MM`` is the release date of the targeted ubuntu distribution.
-
-For example, for the second revision of MAD-X 5.04.02, the full version targeted
-on ubuntu 14.04 (trusty) is:
-
-.. code-block:: none
-
-    5.04.02-2~ubuntu14.04
-
-This format is the result of several iterations and careful consideration. It
-allows to do post-releases (see Troubleshooting_) and correctly compares when
-creating revisions or submitting packages for different ubuntu versions.
-
-See Version_ on how debian version numbers are formed.
-
-.. _Version: https://www.debian.org/doc/debian-policy/ch-controlfields.html#version
-
-
-Troubleshooting
-~~~~~~~~~~~~~~~
-
-When uploading a new package revision for the same upstream release, the
-uploaded source tarball (``.orig.tar.gz``) must be exactly the same, or
-else the upload will be rejected. Normally, this shouldn't happen. If it
-does, however, the options are:
-
-- add a ``+postN`` suffix in the ``upstream_version`` part and reupload.
-  This is the preferred route if the previous tarball was corrupted, or
-  if doing a post-release (i.e. a release on a later commit than the
-  upstream release), the full version number becomes, e.g.::
-
-    5.04.01+post1-1~ubuntu14.04
-
-- if the source tarball in the current directory is corrupted, instead
-  redownload the source tarball from launchpad::
-
-    make redownload
-
-
-Low-level
-~~~~~~~~~
 
 The default make target is actually composed of two steps:
 
@@ -197,6 +192,27 @@ lower-level commands:
     # OR create and install .deb package
     debuild
     sudo dpkg -i ../libmadx-dev-*.deb
+
+
+Troubleshooting
+~~~~~~~~~~~~~~~
+
+When uploading a new package revision for the same upstream release, the
+uploaded source tarball (``.orig.tar.gz``) must be exactly the same, or
+else the upload will be rejected. Normally, this shouldn't happen. If it
+does, however, the options are:
+
+- add a ``+postN`` suffix in the ``upstream_version`` part and reupload.
+  This is the preferred route if the previous tarball was corrupted, or
+  if doing a post-release (i.e. a release on a later commit than the
+  upstream release), the full version number becomes, e.g.::
+
+    5.04.01+post1-1~ubuntu14.04
+
+- if the source tarball in the current directory is corrupted, instead
+  redownload the source tarball from launchpad::
+
+    make redownload
 
 
 Resources

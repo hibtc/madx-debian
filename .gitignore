@@ -1,2 +1,3 @@
+.travis/private.key
 build
 *.swp
