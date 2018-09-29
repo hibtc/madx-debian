@@ -1,3 +1,9 @@
+libmadx-dev (5.04.01+post1-3) xenial; urgency=medium
+
+  * New revision for testing automated deployment from Travis
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Sat, 29 Sep 2018 06:56:37 +0200
+
 libmadx-dev (5.04.01+post1-2) xenial; urgency=medium
 
   * Fix a crash in MAD-X due to symbol collision of the `error`
