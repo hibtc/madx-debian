@@ -3,8 +3,11 @@ sudo: false
 
 matrix:
   include:
-    - dist: trusty
-    - dist: xenial
+    # Note that we can't rely on lsb_release to yield the correct information
+    # (apparently the xenial builder is currently executed on travis), so we
+    # have to define these variables manually:
+    - {dist: trusty, env: CODENAME=trusty RELEASE=14.04}
+    - {dist: xenial, env: CODENAME=xenial RELEASE=16.04}
 
 env:
   global:
@@ -30,8 +33,7 @@ install:
   - gpg --import .travis/private.key
 
 script:
-  - . /etc/lsb-release
-  - sed -i "s/) [a-z]*;/~ubuntu$DISTRIB_RELEASE) $DISTRIB_CODENAME;/" debian/changelog
+  - sed -i "s/) [a-z]*;/~ubuntu$RELEASE) $CODENAME;/" debian/changelog
   - make
 
 deploy:
