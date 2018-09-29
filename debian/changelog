@@ -1,4 +1,4 @@
-libmadx-dev (5.04.01+post1-1~ppa2~ubuntu14.04) trusty; urgency=medium
+libmadx-dev (5.04.01+post1-2~ubuntu14.04) trusty; urgency=medium
 
   * Backport 5.04.01+post1-1~ppa2~ubuntu16.04 to trusty
 

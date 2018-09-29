@@ -127,23 +127,25 @@ formed as follows:
 
 .. code-block:: none
 
-    0~ppaX~ubuntuYY.MM
+    X~ubuntuYY.MM
 
-with the release date ``YY.MM`` of the targeted ubuntu distribution at the end.
-
-Start ``X`` (in ``ppaX``) at 1 and increment on every new package revision of
-the same upstream version.
+Start ``X`` at 1 and increment on every new package revision of the same upstream
+version. ``YY.MM`` is the release date of the targeted ubuntu distribution.
 
 For example, for the second revision of MAD-X 5.04.02, the full version targeted
 on ubuntu 14.04 (trusty) is:
 
 .. code-block:: none
 
-    5.04.02-0~ppa1~ubuntu14.04
+    5.04.02-2~ubuntu14.04
 
 This format is the result of several iterations and careful consideration. It
 allows to do post-releases (see Troubleshooting_) and correctly compares when
 creating revisions or submitting packages for different ubuntu versions.
+
+See Version_ on how debian version numbers are formed.
+
+.. _Version: https://www.debian.org/doc/debian-policy/ch-controlfields.html#version
 
 
 Troubleshooting
@@ -159,7 +161,7 @@ does, however, the options are:
   if doing a post-release (i.e. a release on a later commit than the
   upstream release), the full version number becomes, e.g.::
 
-    5.04.01+post1-0~ppa1~ubuntu14.04
+    5.04.01+post1-1~ubuntu14.04
 
 - if the source tarball in the current directory is corrupted, instead
   redownload the source tarball from launchpad::
@@ -206,6 +208,8 @@ helped creating this repository:
 http://www.infodrom.org/Debian/doc/maint/Maintenance-pkgbuild.html
 
 http://packaging.ubuntu.com/html/
+
+https://www.debian.org/doc/debian-policy/
 
 https://www.debian.org/doc/manuals/maint-guide/
 
