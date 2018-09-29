@@ -8,6 +8,7 @@
 export DEB_BUILD_OPTIONS=nocheck
 
 FLAGS = -DCMAKE_C_COMPILER=gcc \
+        -DCMAKE_C_FLAGS="-fvisibility=hidden" \
         -DCMAKE_Fortran_COMPILER=gfortran \
         -DMADX_STATIC=OFF \
         -DMADX_ONLINE=OFF \
