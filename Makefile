@@ -27,7 +27,7 @@ all: prepare makepkg
 # download + extract the MAD-X source code: 
 $(DOWNLOAD):
 	mkdir -p build
-	wget $(UPSTREAM) -O $(DOWNLOAD)
+	wget --no-verbose $(UPSTREAM) -O $(DOWNLOAD)
 
 $(TARBALL): $(DOWNLOAD)
 	mkdir -p $(TEMP)
