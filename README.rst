@@ -1,19 +1,17 @@
 MAD-X debian package
 --------------------
 
-This repository contains templates needed to create a ``libmadx-dev``
-ubuntu source package for a shared library installation of MAD-X_. The
-suffix ``-dev`` indicates that the package also contains all necessary
-files to link against the shared library.
+This repository contains utilities to create a ``libmadx-dev`` debian package
+for a static library build of MAD-X_.
 
 .. _MAD-X: http://cern.ch/mad
 
-
-Disclaimer
-==========
-
 This is an unofficial build of MAD-X that is not supported by CERN, i.e. in
 case of problems you will not get help there.
+
+The main purpose of this PPA is to speed up testing of cpymad_ on Travis_.
+Therefore, only the default `Travis CI environment`_ is supported for now.
+Email me if you want to use this package on another version of ubuntu.
 
 
 Usage
@@ -30,11 +28,6 @@ you can use this PPA as follows:
 
     # install library:
     sudo apt-get install libmadx-dev
-
-The main purpose of this PPA is to speed up testing of cpymad_ on Travis_.
-Therefore, only the default `Travis CI environment`_ is supported for now.
-
-Email me if you want to use this package on another version of ubuntu.
 
 .. _on launchpad: https://launchpad.net/~coldfix/+archive/ubuntu/madx/
 .. _cpymad: https://github.com/hibtc/cpymad
@@ -57,8 +50,8 @@ Files
 Now edit the contents of the ``debian/`` folder as well as the ``Makefile``
 according to your needs. In particular the following files need to be updated:
 
-- ``debian/changelog``: add package revision via ``dch -v VERSION``, see
-  `Version numbers`_. Start with the latest targeted ubuntu release.
+- ``debian/changelog``: add a new entry (``dch -v VERSION``), see also
+  `Version numbers`_ for the targeted ubuntu release.
 
 - ``Makefile``: update the ``COMMIT`` variable. It should usually be set to
   ``COMMIT=$(VERSION)`` unless doing a post-release.
@@ -73,12 +66,16 @@ Less frequently you may also need to change:
 Trigger package build
 ~~~~~~~~~~~~~~~~~~~~~
 
-Pushing a new commit will trigger Travis CI to build a new source package.  If
+Pushing a new commit will trigger Travis CI to build a new source package. If
 this succeeds, create a tag and push it to make travis upload the source
 package, e.g.::
 
    git tag 5.04.01-2
    git push --tag
+
+
+In order to add another ubuntu release that is available on travis, add a
+corresponding entry in ``.travis.yml`` under the ``matrix:`` section.
 
 
 Version numbers
