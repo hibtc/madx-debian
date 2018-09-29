@@ -24,6 +24,10 @@ addons:
       - fakeroot
       - dput
 
+before_install:
+  - lsb_release -a
+  - env | sort
+
 install:
   - openssl aes-256-cbc
         -K $encrypted_2472284bc835_key
