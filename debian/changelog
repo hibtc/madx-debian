@@ -1,23 +1,11 @@
-libmadx-dev (5.04.01+post1-2~ubuntu14.04) trusty; urgency=medium
-
-  * Backport 5.04.01+post1-1~ppa2~ubuntu16.04 to trusty
-
- -- Thomas Gläßle <t_glaessle@gmx.de>  Sat, 29 Sep 2018 02:22:27 +0200
-
-libmadx-dev (5.04.01+post1-1~ppa2~ubuntu16.04) xenial; urgency=medium
+libmadx-dev (5.04.01+post1-2) xenial; urgency=medium
 
   * Fix a crash in MAD-X due to symbol collision of the `error`
     function with `error(3)` from the C standard library.
 
  -- Thomas Gläßle <t_glaessle@gmx.de>  Sat, 29 Sep 2018 02:19:46 +0200
 
-libmadx-dev (5.04.01+post1-1~ppa1~ubuntu14.04) trusty; urgency=medium
-
-  * Backport 5.04.01+post1-1~ppa1~ubuntu16.04 to trusty
-
- -- Thomas Gläßle <t_glaessle@gmx.de>  Mon, 17 Sep 2018 02:13:51 +0200
-
-libmadx-dev (5.04.01+post1-1~ppa1~ubuntu16.04) xenial; urgency=medium
+libmadx-dev (5.04.01+post1-1) xenial; urgency=medium
 
   * Use a newer upstream commit that makes X11 and zlib
     optional and integrates the cmake patch
