@@ -1,23 +1,25 @@
-# You must specify the debian release CODENAME on the command line
-# for different releases (using, e.g. `make RELEASE=xenial`):
-CODENAME ?= trusty
-CODEDATE ?= 14.04
-
 PACKAGE  = libmadx-dev
-VERSION  = 5.04.01+post1
-REVISION = 1
-SUFFIX   = ~ppa1~ubuntu$(CODEDATE)
-
 RELEASES = https://github.com/MethodicalAcceleratorDesign/MAD-X/archive
+
+# auto-detect version from debian/changelog:
+CODENAME = $(shell head -n1 debian/changelog | sed -n 's/.*([0-9a-zA-Z.+~-].*) \([a-z]*\); .*/\1/p')
+VERSION  = $(shell head -n1 debian/changelog | sed -n 's/.*(\([0-9a-zA-Z.+~-]*\)-[0-9a-zA-Z.+~].*) .*/\1/p')
+REVISION = $(shell head -n1 debian/changelog | sed -n 's/.*([0-9a-zA-Z.+~-]*-\([0-9a-zA-Z.+~].*\)) .*/\1/p')
+
+
+# upstream version to download:
 COMMIT   = 36769507dcfea517aff2f11c0e219c1ae37634cf
 DOWNLOAD = build/$(COMMIT).tar.gz
 EXTRACT  = MAD-X-$(COMMIT)
 UPSTREAM = $(RELEASES)/$(DOWNLOAD)
 
+# resulting package files:
 TEMP     = build/$(CODENAME)
 TARBALL  = $(TEMP)/$(PACKAGE)_$(VERSION).orig.tar.gz
-UPLOAD   = $(TEMP)/$(PACKAGE)_$(VERSION)-$(REVISION)$(SUFFIX)_source.changes
+UPLOAD   = $(TEMP)/$(PACKAGE)_$(VERSION)-$(REVISION)_source.changes
 BUILDDIR = $(TEMP)/$(PACKAGE)-$(VERSION)
+
+PPA      = https://launchpad.net/~coldfix/+archive/ubuntu/madx
 
 
 all: prepare makepkg
@@ -39,7 +41,6 @@ download: $(DOWNLOAD)
 
 prepare: $(TARBALL) $(BUILDDIR)
 	cp -r debian $(BUILDDIR)
-	sed -i 's/) UNRELEASED/$(SUFFIX)) $(CODENAME)/' $(BUILDDIR)/debian/changelog
 
 makepkg:
 	cd $(BUILDDIR) && debuild -S
@@ -55,3 +56,6 @@ upload:
 
 clean:
 	rm -rf $(BUILDDIR)
+
+redownload:
+	wget $(PPA)/+files/libmadx-dev_$(VERSION).orig.tar.gz

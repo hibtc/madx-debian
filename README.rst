@@ -80,45 +80,105 @@ Then reload the file (``source ~/.bashrc``) or simply restart your terminal.
 Update package
 ~~~~~~~~~~~~~~
 
-Now you may edit the contents of the ``debian/`` folder as well as the
-``Makefile`` according to your needs. In particular the following files need to
-be updated
+Now edit the contents of the ``debian/`` folder as well as the ``Makefile``
+according to your needs. In particular the following files need to be updated:
 
-- ``Makefile``: version number, download recipe for upstream tarball
+- ``debian/changelog``: add package revision via ``dch -v VERSION``, see
+  `Version numbers`_. Start with the latest targeted ubuntu release.
+
+- ``Makefile``: update the ``COMMIT`` variable. It should usually be set to
+  ``COMMIT=$(VERSION)`` unless doing a post-release.
+
+Less frequently you may also need to change:
 
 - ``debian/control``: dependencies, conflicts, description
 
-- ``debian/rules``: build recipe
+- ``debian/rules``: build recipe: cmake parameters
 
-- ``debian/changelog``: add package revision (via ``dch -v VERSION``)
-
-
-Build/install/upload
-~~~~~~~~~~~~~~~~~~~~
-
-From there on, there might be multiple things you might want to do:
+From there on, proceed as follows:
 
 .. code-block:: bash
 
     # make sure, there are no left-overs from previous attempts:
     make clean
 
-    # download MAD-X and make trusty source package:
-    make CODENAME=trusty CODEDATE=14.04
+    # download MAD-X and make source package:
+    make
 
     # upload final source package:
-    make CODENAME=trusty CODEDATE=14.04 upload
+    make upload
+
+After uploading, add one entry at a time for all older supported ubuntu
+versions via ``dch -v`` and ``make && make upload`` each time. The changelog
+text for these entries should be ``* backport of version XXXX``.
+
+Currently, the targeted ubuntu versions are::
+
+    xenial (16.04)
+    trusty (14.04)
+
+
+Version numbers
+~~~~~~~~~~~~~~~
+
+The version format is assumed to be ``upstream_version-revision``, where
+``upstream_version`` is the MAD-X version number and ``revision`` should be
+formed as follows:
+
+.. code-block:: none
+
+    0~ppaX~ubuntuYY.MM
+
+with the release date ``YY.MM`` of the targeted ubuntu distribution at the end.
+
+Start ``X`` (in ``ppaX``) at 1 and increment on every new package revision of
+the same upstream version.
+
+For example, for the second revision of MAD-X 5.04.02, the full version targeted
+on ubuntu 14.04 (trusty) is:
+
+.. code-block:: none
+
+    5.04.02-0~ppa1~ubuntu14.04
+
+This format is the result of several iterations and careful consideration. It
+allows to do post-releases (see Troubleshooting_) and correctly compares when
+creating revisions or submitting packages for different ubuntu versions.
+
+
+Troubleshooting
+~~~~~~~~~~~~~~~
+
+When uploading a new package revision for the same upstream release, the
+uploaded source tarball (``.orig.tar.gz``) must be exactly the same, or
+else the upload will be rejected. Normally, this shouldn't happen. If it
+does, however, the options are:
+
+- add a ``+postN`` suffix in the ``upstream_version`` part and reupload.
+  This is the preferred route if the previous tarball was corrupted, or
+  if doing a post-release (i.e. a release on a later commit than the
+  upstream release), the full version number becomes, e.g.::
+
+    5.04.01+post1-0~ppa1~ubuntu14.04
+
+- if the source tarball in the current directory is corrupted, instead
+  redownload the source tarball from launchpad::
+
+    make redownload
+
+
+Low-level
+~~~~~~~~~
 
 The default make target is actually composed of two steps:
 
 .. code-block:: bash
 
-    # prepare build folder for trusty source package:
-    # download and extract MAD-X into build/trusty subdirectory:
-    make CODENAME=trusty CODEDATE=14.04 prepare
+    # download and extract MAD-X into build/ subdirectory:
+    make prepare
 
     # create the source archive:
-    make CODENAME=trusty CODEDATE=14.04 makepkg
+    make makepkg
 
 If there is need to things manually, I also want to mention these
 lower-level commands:
@@ -135,17 +195,6 @@ lower-level commands:
     # OR create and install .deb package
     debuild
     sudo dpkg -i ../libmadx-dev-*.deb
-
-When uploading a new package revision for the same upstream release, the
-uploaded source tarball must be exactly the same, or else the upload will be
-rejected. Therefore, either
-
-- redownload the source tarball from launchpad::
-
-    PPA=https://launchpad.net/~coldfix/+archive/ubuntu/madx
-    wget $PPA/+files/libmadx-dev_5.02.08.orig.tar.gz
-
-- OR remove the tar file before creating/uploading the source package
 
 
 Resources
