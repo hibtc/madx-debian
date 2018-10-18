@@ -8,7 +8,7 @@ REVISION = $(shell head -n1 debian/changelog | sed -n 's/.*([0-9a-zA-Z.+~-]*-\([
 
 
 # upstream version to download:
-COMMIT   = 36769507dcfea517aff2f11c0e219c1ae37634cf
+COMMIT   = $(VERSION)
 DOWNLOAD = build/$(COMMIT).tar.gz
 EXTRACT  = MAD-X-$(COMMIT)
 UPSTREAM = $(RELEASES)/$(COMMIT).tar.gz

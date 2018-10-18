@@ -93,7 +93,7 @@ on ubuntu 14.04 (trusty) is::
 
     5.04.02-2~ubuntu14.04
 
-It is important to uphoald this format, otherwise launchpad may reject your
+It is important to uphold this format, otherwise launchpad may reject your
 present or future uploads (see Troubleshooting_).
 
 See Version_ on how debian version numbers are formed.

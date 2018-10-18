@@ -1,3 +1,9 @@
+libmadx-dev (5.04.02-1) xenial; urgency=medium
+
+  * New upstream release
+
+ -- Thomas Gläßle <t_glaessle@gmx.de>  Thu, 18 Oct 2018 16:45:37 +0200
+
 libmadx-dev (5.04.01+post1-5) xenial; urgency=medium
 
   * New revision for testing automated deployment from Travis
